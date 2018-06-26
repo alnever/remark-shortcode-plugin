@@ -1,0 +1,43 @@
+.remark {
+  display: block;
+  border: dotted 1px #303030;
+  background-color: #c0c0c0;
+  font-family: "Times New Roman";
+  padding: 20px 20px 20px 40px;
+  width: 100%;
+}
+
+.remark .author {
+	display: block;
+	text-align: right;
+	font-style: italic;
+	color: #303030;
+}
+
+.remark .source {
+	text-align: right;
+	display: block;
+	font-style: italic;
+	color: #303030;
+}
+
+.remark .link_place {
+	display: block;
+	text-align: right;
+	font-size: smaller;
+}
+
+.remark .link, .remark .link:active, .remark .link:visited {
+	text-align: right;
+	font-style: italic;
+	text-decoration: underline;
+	color: #303030;
+}
+
+.remark .link:hower {
+	text-align: right;
+	font-style: italic;
+	text-decoration: underline;
+	color: #101010;
+}
+
