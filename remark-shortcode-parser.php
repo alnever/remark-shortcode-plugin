@@ -5,11 +5,11 @@
  * @link
  * @since 1.0
  *
- * @package wordpress-plugin-template
- * @subpackage wordpress-plugin-template/admin
-*/
+ * @package remark-shortcode-plugin
+ * @subpackage remark-shortcode-plugin
+ */
 
-namespace RemarkShortcodePrlugin;
+namespace RemarkShortcodePlugin;
 
 class Remark_Shortcode_Parser {
 
@@ -17,8 +17,11 @@ class Remark_Shortcode_Parser {
 
 	}
 
+	/*
+		A static function to parse pseudo twig template
+	*/
 	public static function parse($str = "", $args = array()) {
-
+		// replace all tokens in the template with given values
 		foreach($args as $key => $value) {
 			$str = str_replace("{{ $key }}",$value,$str);
 		}

@@ -22,11 +22,15 @@ License: GPL2
 
 */
 
-namespace RemarkShortcodePrlugin;
+namespace RemarkShortcodePlugin;
 
+/*
+  Autoload function
+*/
 spl_autoload_register(
   function ($class_name) {
-    if ( ! class_exists($class_name, FALSE) ) {
+    if ( ! class_exists($class_name, FALSE) && strstr($class_name, __NAMESPACE__) !== FALSE )
+    { 
       $class_name = str_replace(__NAMESPACE__."\\","",$class_name);
       $class_name = strtolower($class_name);
       $class_name = str_replace("_","-",$class_name);
@@ -39,9 +43,16 @@ spl_autoload_register(
 class Remark_Shortcode_Plugin {
 
   private $shortcode;
+  private $admin;
+
   public function __construct() {
-    $this->shortcode = new Remark_Shortcode();
-    add_action('wp_enqueue_scripts', array($this->shortcode, 'enqueue_styles'));
+    if (is_admin()) {
+      // register admin part
+      $this->admin = new Admin\Remark_Shortcode_Plugin_Admin();  
+    } else {
+      // register front-end part
+      $this->shortcode = new Remark_Shortcode();
+    }
   }
 }
 

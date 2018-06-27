@@ -4,41 +4,40 @@
  * @link
  * @since 1.0
  *
- * @package wordpress-plugin-template
- * @subpackage wordpress-plugin-template/admin
+ * @package remark-shortcode-plugin
+ * @subpackage remark-shortcode-plugin
 */
 
-namespace RemarkShortcodePrlugin;
+namespace RemarkShortcodePlugin;
 
 class Remark_Shortcode {
 
 
   public function __construct() {
+    add_action('wp_enqueue_scripts', array($this, 'enqueue_styles'));
     add_shortcode('remark',array($this, 'shortcode'));
   }
 
-  public function shortcode($atts = [], $content = '', $tag) {
+  public function shortcode($atts = [], $content = '', $tag = null) {
 
     // handle shortcodes attributes
     $atts = array_change_key_case((array)$atts, CASE_LOWER);
-    /*
-    $remark_atts = shortcode_atts(
-      array('author' => 'Unknown author'),
-      $atts,$tag
-    );
-    */
 
     //handle content
     if ( $content != null ) {
-        $author = $atts['author'] != null ? $atts['author'] : '';
-        $source = $atts['source'] != null ? $atts['source'] : '';
-        $link   = $atts['link'] != null ? $atts['link'] : '';
-        $link_name = $atts['link_name'] != null ? $atts['link_name'] : '';
+        $author = isset($atts['author']) && $atts['author'] != null ? $atts['author'] : '';
+        $source = isset($atts['source']) && $atts['source'] != null ? $atts['source'] : '';
+        $link   = isset($atts['link']) && $atts['link'] != null ? $atts['link'] : '';
+        $link_name = isset($atts['link_name']) && $atts['link_name'] != null ? $atts['link_name'] : '';
 
-        // parse a content
+        // parse a content and return as a result of the shortcode
+        // during the content parsing, the custom CSS is token form the plugin options
+        // and injected into the remark view
+
         return  Remark_Shortcode_Parser::parse(
             file_get_contents(dirname(__FILE__) . "/partial/remark-shortcode-view.twig"),
-            array('content' => $content,
+            array('custom_css' => isset(get_option('remark_shortcode_options')['custom_css']) ? get_option('remark_shortcode_options')['custom_css'] : "",
+                  'content' => $content,
                   'author' => $author,
                   'source' => $source,
                   'link'   => $link,

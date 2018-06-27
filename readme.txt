@@ -24,3 +24,7 @@ The parameters author, source, link, and link_name are optional.
 * link_name - the link text on the page
 
 The <content> - a text shown as a remark.
+
+v 1.1
+The settings page was included.
+There is just one option - a custom CSS, which may be used to adopt the remark's view to the design of the site.
