@@ -62,7 +62,7 @@ class Remark_Shortcode_Plugin_Admin {
 	// Add an options page into the Settings menu of the WordPress admin panel
 	public function add_plugin_page() {
 		add_options_page (
-			'Settings Admin', // Page title
+			'Remark Shortcode Options', // Page title
 			'Remark Shortcode Options', // Menu title
 			'manage_options', // capabilities - who can use the page
 			'remark-settings-admin', // menu slug
