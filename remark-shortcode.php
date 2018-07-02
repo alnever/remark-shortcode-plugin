@@ -50,7 +50,7 @@ class Remark_Shortcode {
   }
 
   public function enqueue_styles() {
-    wp_enqueue_style('remark-shortcode-style', plugin_dir_url(__FILE__).'/css/remark-shortcode.css', null, null, all);
+    wp_enqueue_style('remark-shortcode-style', plugin_dir_url(__FILE__).'/css/remark-shortcode.css', null, null, 'all');
   }
 }
 
